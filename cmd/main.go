@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	version, build, win, arch, product, kbResults := systemInfo.DetermineProduct()
-	fmt.Println(product, win, build, version, arch, kbResults)
+	// 获取操作系统名称和操作系统安装的补丁
+	product, kbs := systemInfo.GetProductAndKbs()
 	var kbmap = make(map[string]string)
-	for _, v := range kbResults {
+	for _, v := range kbs {
 		kbmap[v] = ""
 	}
 	var newKbResults []string

@@ -27,7 +27,7 @@ func ConvertByte2String(byte []byte, charset Charset) string {
 	return str
 }
 
-func GetValueStringByRegex(str, rule string) []string {
+func GetValueByRegex(str, rule string) []string {
 	reg, err := regexp.Compile(rule)
 	if reg == nil || err != nil {
 		return nil
