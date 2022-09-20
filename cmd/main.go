@@ -10,15 +10,13 @@ import (
 func main() {
 	// 获取操作系统名称和操作系统安装的补丁
 	product, kbs := systemInfo.GetProductAndKbs()
-	var kbmap = make(map[string]string)
-	for _, v := range kbs {
-		kbmap[v] = ""
-	}
-	var newKbResults []string
-	for key := range kbmap {
-		newKbResults = append(newKbResults, key)
-	}
+
+	// 从db中获取所有的漏洞
 	allCve := db.GetAllCve()
-	filtered, found := detector.Detect(product, allCve, newKbResults)
-	fmt.Println(filtered, found)
+
+	// 开始检测漏洞
+	result := detector.Detect(product, allCve, kbs)
+	for _, v := range result {
+		fmt.Printf("%v\n", v)
+	}
 }
